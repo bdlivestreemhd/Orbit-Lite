@@ -1,77 +1,148 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraStream - Settings</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Settings - Live TV Streaming</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-bg: #121420;
-            --secondary-bg: #1E2232;
-            --accent-color: #4A90E2;
-            --text-color: #FFFFFF;
-            --hover-color: #5A6ACF;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a73e8;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --bg-primary: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --border-color: #dadce0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            line-height: 1.6;
+            background: var(--bg-primary);
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        body.dark-mode {
+            --primary-color: #8ab4f8;
+            --text-primary: #e8eaed;
+            --text-secondary: #9aa0a6;
+            --bg-primary: #202124;
+            --bg-secondary: #292a2d;
+            --border-color: #3c4043;
         }
 
-        .settings-header {
+        /* Header Styles */
+        .header {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            background-color: var(--secondary-bg);
-            padding: 15px;
-            border-radius: 10px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .app-logo {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: var(--bg-primary);
+        }
+
+        /* Settings Container */
+        .settings-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
         .settings-section {
-            background-color: var(--secondary-bg);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
         }
 
-        .settings-section-title {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
+        .settings-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
         }
 
+        /* Settings Items */
         .setting-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: var(--primary-bg);
-            border-radius: 10px;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
 
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            flex: 1;
+        }
+
+        .setting-title {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .setting-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Toggle Switch */
         .toggle-switch {
             position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
+            width: 50px;
+            height: 24px;
         }
 
         .toggle-switch input {
@@ -80,23 +151,23 @@
             height: 0;
         }
 
-        .slider {
+        .toggle-slider {
             position: absolute;
             cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: var(--text-secondary);
             transition: .4s;
-            border-radius: 34px;
+            border-radius: 24px;
         }
 
-        .slider:before {
+        .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
+            height: 16px;
+            width: 16px;
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -104,216 +175,248 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
-            background-color: var(--accent-color);
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
         }
 
-        input:checked + .slider:before {
+        input:checked + .toggle-slider:before {
             transform: translateX(26px);
         }
 
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        /* Select Input */
+        .setting-select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-width: 150px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
         }
 
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
+        .setting-select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
-        .btn-danger {
-            background-color: #ff4444;
+        /* About Section */
+        .about-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .about-content h3 {
+            color: var(--text-primary);
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .feature-list i {
+            color: var(--primary-color);
+        }
+
+        /* Version Info */
+        .version-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
             color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         /* Responsive Design */
         @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-
             .setting-item {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .setting-select {
+                width: 100%;
+            }
+
+            .toast {
+                left: 20px;
+                right: 20px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="settings-header">
-            <h1>UltraStream Settings</h1>
-            <button onclick="goBack()" class="btn btn-primary">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="LiveTV Stream" class="app-logo">
+            <a href="index.html" class="logo">LiveTV Stream</a>
+        </div>
+        <button class="back-button" onclick="location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </header>
+
+    <div class="settings-container">
+        <!-- Appearance Settings -->
+        <div class="settings-section">
+            <h2><i class="fas fa-paint-brush"></i> Appearance</h2>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <div class="setting-title">Dark Mode</div>
+                    <div class="setting-description">Switch between light and dark theme</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
         </div>
 
+        <!-- Player Settings -->
         <div class="settings-section">
-            <div class="settings-section-title">
-                <i class="fas fa-play"></i> Playback Settings
-            </div>
+            <h2><i class="fas fa-play-circle"></i> Player Settings</h2>
             <div class="setting-item">
-                <span>Auto-Play Next Channel</span>
+                <div class="setting-label">
+                    <div class="setting-title">Auto-Play</div>
+                    <div class="setting-description">Automatically play channels when selected</div>
+                </div>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="autoPlayToggle">
-                    <span class="slider"></span>
+                    <input type="checkbox" id="autoPlayToggle" onchange="toggleAutoPlay()">
+                    <span class="toggle-slider"></span>
                 </label>
             </div>
             <div class="setting-item">
-                <span>Default Video Quality</span>
-                <select id="qualitySelect" class="form-control">
+                <div class="setting-label">
+                    <div class="setting-title">Default Quality</div>
+                    <div class="setting-description">Set default streaming quality</div>
+                </div>
+                <select class="setting-select" id="qualitySelect" onchange="changeQuality()">
                     <option value="auto">Auto</option>
-                    <option value="720p">720p</option>
-                    <option value="1080p">1080p</option>
-                    <option value="4k">4K</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
                 </select>
             </div>
         </div>
 
+        <!-- About Section -->
         <div class="settings-section">
-            <div class="settings-section-title">
-                <i class="fas fa-cog"></i> Advanced Settings
-            </div>
-            <div class="setting-item">
-                <span>Enable Experimental Features</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="experimentalToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <div class="setting-item">
-                <span>Data Saver Mode</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="dataSaverToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
+            <h2><i class="fas fa-info-circle"></i> About</h2>
+            <div class="about-content">
+                <h3>Live TV Streaming App</h3>
+                <p>A professional IPTV streaming application that supports various playlist formats and provides a seamless viewing experience.</p>
+                
+                <h3>Key Features</h3>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> M3U/M3U8 Playlist Support</li>
+                    <li><i class="fas fa-check"></i> Advanced Video Player</li>
+                    <li><i class="fas fa-check"></i> Channel Categories</li>
+                    <li><i class="fas fa-check"></i> Search Functionality</li>
+                    <li><i class="fas fa-check"></i> Dark Mode Support</li>
+                    <li><i class="fas fa-check"></i> Responsive Design</li>
+                </ul>
 
-        <div class="settings-section">
-            <div class="settings-section-title">
-                <i class="fas fa-shield-alt"></i> Privacy & Data
-            </div>
-            <div class="setting-item">
-                <span>Clear All Saved Playlists</span>
-                <button onclick="clearAllPlaylists()" class="btn btn-danger">
-                    <i class="fas fa-trash"></i> Clear
-                </button>
-            </div>
-            <div class="setting-item">
-                <span>Reset App to Default Settings</span>
-                <button onclick="resetAppSettings()" class="btn btn-danger">
-                    <i class="fas fa-undo"></i> Reset
-                </button>
-            </div>
-        </div>
+                <h3>Developer Information</h3>
+                <p>Developed by: Sultan Arabi</p>
+                <p>Contact: sultan@example.com</p>
+                <p>Website: www.example.com</p>
 
-        <div class="settings-section">
-            <div class="settings-section-title">
-                <i class="fas fa-info-circle"></i> About UltraStream
-            </div>
-            <div class="setting-item">
-                <span>App Version</span>
-                <span>1.0.0</span>
-            </div>
-            <div class="setting-item">
-                <span>Developer</span>
-                <span>AI Assistant</span>
+                <div class="version-info">
+                    <p>Version: 1.0.2</p>
+                    <p>Last Updated: December 2024</p>
+                    <p>Build: 2024.12.15</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="toast" id="toast"></div>
+
     <script>
-        // Settings Management Class
-        class SettingsManager {
-            constructor() {
-                this.settings = this.loadSettings();
-            }
+        // Load saved settings when page loads
+        document.addEventListener('DOMContentLoaded', loadSettings);
 
-            loadSettings() {
-                const defaultSettings = {
-                    autoPlay: false,
-                    videoQuality: 'auto',
-                    experimentalFeatures: false,
-                    dataSaverMode: false
-                };
-                return JSON.parse(localStorage.getItem('ultraStreamSettings')) || defaultSettings;
-            }
+        function loadSettings() {
+            // Load dark mode setting
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            document.getElementById('darkModeToggle').checked = darkMode;
+            if(darkMode) document.body.classList.add('dark-mode');
 
-            saveSettings() {
-                localStorage.setItem('ultraStreamSettings', JSON.stringify(this.settings));
-            }
+            // Load auto-play setting
+            const autoPlay = localStorage.getItem('autoPlay') === 'true';
+            document.getElementById('autoPlayToggle').checked = autoPlay;
 
-            updateSettings() {
-                // Auto Play Toggle
-                this.settings.autoPlay = document.getElementById('autoPlayToggle').checked;
-
-                // Quality Select
-                this.settings.videoQuality = document.getElementById('qualitySelect').value;
-
-                // Experimental Features
-                this.settings.experimentalFeatures = document.getElementById('experimentalToggle').checked;
-
-                // Data Saver Mode
-                this.settings.dataSaverMode = document.getElementById('dataSaverToggle').checked;
-
-                this.saveSettings();
-            }
-
-            initializeSettingsUI() {
-                // Set initial state of toggles and selects
-                document.getElementById('autoPlayToggle').checked = this.settings.autoPlay;
-                document.getElementById('qualitySelect').value = this.settings.videoQuality;
-                document.getElementById('experimentalToggle').checked = this.settings.experimentalFeatures;
-                document.getElementById('dataSaverToggle').checked = this.settings.dataSaverMode;
-            }
+            // Load quality setting
+            const quality = localStorage.getItem('quality') || 'auto';
+            document.getElementById('qualitySelect').value = quality;
         }
 
-        // Instantiate Settings Manager
-        const settingsManager = new SettingsManager();
-
-        // Function to go back to previous page
-        function goBack() {
-            window.location.href = 'index.html';
+        function toggleDarkMode() {
+            const darkMode = document.getElementById('darkModeToggle').checked;
+            localStorage.setItem('darkMode', darkMode);
+            document.body.classList.toggle('dark-mode', darkMode);
+            showToast('Theme updated');
         }
 
-        // Clear All Playlists
-        function clearAllPlaylists() {
-            if (confirm('Are you sure you want to clear all saved playlists?')) {
-                localStorage.removeItem('userPlaylists');
-                alert('All playlists have been cleared.');
-            }
+        function toggleAutoPlay() {
+            const autoPlay = document.getElementById('autoPlayToggle').checked;
+            localStorage.setItem('autoPlay', autoPlay);
+            showToast('Auto-play setting updated');
         }
 
-        // Reset App Settings
-        function resetAppSettings() {
-            if (confirm('Are you sure you want to reset all app settings?')) {
-                localStorage.removeItem('ultraStreamSettings');
-                location.reload();
-            }
+        function changeQuality() {
+            const quality = document.getElementById('qualitySelect').value;
+            localStorage.setItem('quality', quality);
+            showToast('Quality setting updated');
         }
 
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Settings UI
-            settingsManager.initializeSettingsUI();
-
-            // Add event listeners to settings controls
-            document.getElementById('autoPlayToggle').addEventListener('change', () => settingsManager.updateSettings());
-            document.getElementById('qualitySelect').addEventListener('change', () => settingsManager.updateSettings());
-            document.getElementById('experimentalToggle').addEventListener('change', () => settingsManager.updateSettings());
-            document.getElementById('dataSaverToggle').addEventListener('change', () => settingsManager.updateSettings());
-        });
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
     </script>
 </body>
 </html>
